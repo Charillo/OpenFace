@@ -1,0 +1,17 @@
+body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+.bgimg {
+    /* background-image: url('http://www.zastavki.com/pictures/1366x768/2007/Widescreen_Black_and_white_New_York_005187_.jpg'); */
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+
+}
+.tableColor {background-color: coral;}
+
+.center {
+    margin: auto;
+    width: 60%;
+    border: 3px solid #73AD21;
+    padding: 10px;
+}

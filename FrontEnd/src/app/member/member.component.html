@@ -1,0 +1,132 @@
+<!-- <div id="data-grid-demo">
+  <dx-data-grid [showRowLines]="true" [showBorders]="true" [rowAlternationEnabled]="true" id="gridContainer" keyExpr="ID" [dataSource]="ListMemberOnTable"
+   >
+    <dxo-search-panel [visible]="true"></dxo-search-panel>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+    </dxo-editing>
+
+    <dxi-column caption="Firstname" dataField="em_firstname"></dxi-column>
+    <dxi-column caption="Lastname" dataField="em_lastname"></dxi-column>
+    <dxi-column caption="Card" dataField="em_id_card"></dxi-column>
+    <dxi-column caption="Tel" dataField="em_tel"></dxi-column>
+    <dxi-column caption="Address" dataField="em_address"></dxi-column>
+
+
+  </dx-data-grid>
+</div> -->
+<!-- <button (click)="link('Member')">Member</button>
+<button (click)="link('RealTime')">Real Time</button> -->
+
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+</style>
+
+<div class="bgimg blur"></div>
+<div class="w3-display-middle " style="width:95%; height:80%">
+  <div class=" w3-container  w3-center " style="padding:128px 16px" id="data-grid-demo">
+    <div class="dx-field">
+      <div class="dx-field-value">
+        <dx-button [text]="okButtonOptions.text" [type]="okButtonOptions.type" (onClick)="okButtonOptions.onClick()"></dx-button>
+      </div>
+    </div>
+    <dx-data-grid [showRowLines]="true" [showBorders]="true" [rowAlternationEnabled]="true" (onRowRemoved)="DeleteMember($event)"
+      (onRowUpdated)="EditMember($event)" id="gridContainer" [dataSource]="ListMemberOnTable" (onCellPrepared)="onCellPrepared($event)">
+      <dxo-search-panel [visible]="true"></dxo-search-panel>
+      <dxo-paging [enabled]="false"></dxo-paging>
+      <dxo-editing mode="popup" [allowUpdating]="true" [allowDeleting]="true">
+        <dxo-popup [width]="800" [height]="545" title="Select year before add new target" [showTitle]="true" cellTemplate="popup"></dxo-popup>
+      </dxo-editing>
+      <dxi-column caption="ID" dataField="em_id">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-column>
+      <dxi-column caption="Firstname" dataField="em_firstname">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-column>
+      <dxi-column caption="Lastname" dataField="em_lastname">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-column>
+      <dxi-column caption="Card" dataField="em_id_card">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-column>
+      <dxi-column caption="Tel" dataField="em_tel">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-column>
+      <dxi-column caption="Address" dataField="em_address">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-column>
+      <dxi-column caption="Images" dataField="em_images" [width]="100"  cellTemplate="em_images"></dxi-column>
+      <div *dxTemplate="let cellData of 'em_images'">
+        <img [src]="cellData.text" />
+      </div>
+
+    </dx-data-grid>
+  </div>
+
+</div>
+<!-- Navbar -->
+
+<div class="w3-top">
+
+  <div class="w3-bar w3-black w3-card">
+
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()"
+      title="Toggle Navigation Menu">
+      <i class="fa fa-bars"></i>
+    </a>
+
+    <a href="#main" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+    <a href="#member" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MEMBER</a>
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="More">REALTIME
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="https://localhost:8000/realtime.html" class="w3-bar-item w3-button">Realtime scan</a>
+        <a href="#history" class="w3-bar-item w3-button">History</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+  <a href="#home" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+  <a href="#member" class="w3-bar-item w3-button w3-padding-large">MEMBER</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large">REALTIME</a>
+</div>
+
+
+<script>
+  // Used to toggle the menu on small screens when clicking on the menu button
+  function myFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+      x.className += " w3-show";
+    } else {
+      x.className = x.className.replace(" w3-show", "");
+    }
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  var modal = document.getElementById('ticketModal');
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+
+
+
+</html>
+
